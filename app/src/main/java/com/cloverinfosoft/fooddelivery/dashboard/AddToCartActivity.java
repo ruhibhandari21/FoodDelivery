@@ -113,7 +113,6 @@ public class AddToCartActivity extends AppCompatActivity implements OnTaskComple
         hashMap.put("authKey", AppConstants.AUTH_KEY);
         hashMap.put("deviceIp", preferencesManager.getdeviceIP());
         hashMap.put("token", preferencesManager.gettoken());
-
         new WebService(mContext, this, hashMap, "readyToCheckout").execute(AppConstants.BASE_URL + AppConstants.READY_TO_CHECKOUT);
     }
 
