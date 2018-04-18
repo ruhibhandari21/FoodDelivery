@@ -2,9 +2,11 @@ package com.cloverinfosoft.fooddelivery.initials;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.format.Formatter;
 import android.text.method.PasswordTransformationMethod;
 import android.view.MotionEvent;
 import android.view.View;
@@ -56,10 +58,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         initUI();
         initListener();
-        callCreateCookiesWS();
+
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
+        String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+        preferencesManager=PreferencesManager.getInstance(this);
+        preferencesManager.setdeviceIP(ip);
 
+        callCreateCookiesWS();
+    }
 
     public void initUI() {
         edt_emailid = (EditText) findViewById(R.id.edt_emailid);

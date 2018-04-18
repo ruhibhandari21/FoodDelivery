@@ -149,7 +149,7 @@ public class AddToCartActivity extends AppCompatActivity implements OnTaskComple
         hashMap.put("token", preferencesManager.gettoken());
         hashMap.put("txnid", txnid);
         hashMap.put("paid", 1 + "");
-        hashMap.put("paymentResponse", "");
+        hashMap.put("paymentResponse", txnid);
         new WebService(mContext, this, hashMap, "updateDummyOrderBytxnid").execute(AppConstants.BASE_URL + AppConstants.updateDummyOrderBytxnid);
     }
 
