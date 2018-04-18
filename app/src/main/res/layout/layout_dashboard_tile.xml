@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="260dp"
+    android:background="@mipmap/background_card">
+
+
+
+<FrameLayout
+    android:layout_above="@+id/tv_name"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/food_image"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:src="@drawable/meal"
+         />
+
+    <TextView
+        android:background="@color/colorWhite"
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        />
+
+    <TextView
+        android:layout_width="0.5dp"
+        android:layout_height="5dp"
+        android:background="#7F7F7F"
+        android:layout_gravity="bottom|left"
+        />
+    <TextView
+        android:layout_width="0.5dp"
+        android:layout_height="5dp"
+        android:background="#7F7F7F"
+        android:layout_gravity="bottom|right"
+        />
+
+
+</FrameLayout>
+
+    <ImageView
+        android:id="@+id/img_veg_non_veg"
+        android:layout_width="20dp"
+        android:layout_height="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/icn_veg" />
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/tv_price"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="sans-serif"
+        android:singleLine="true"
+        android:text="Full meal with rice"
+        android:textColor="@color/colorTextColor"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_add_to_cart"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:fontFamily="sans-serif"
+        android:text="\u20B9100"
+        android:textColor="@color/colorTextColor"
+        android:textSize="14sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_add_to_cart"
+        android:layout_marginRight="5dp"
+        android:layout_toLeftOf="@+id/rate"
+        android:fontFamily="sans-serif"
+        android:text="4.5"
+        android:textColor="@color/colorTextColor"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/rate"
+        android:layout_width="15sp"
+        android:layout_height="15sp"
+        android:layout_above="@+id/btn_add_to_cart"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:fontFamily="sans-serif"
+        android:src="@mipmap/icn_rating"
+        android:text="4.5"
+        android:textColor="@color/colorTextColor"
+        android:textSize="14sp" />
+
+
+    <Button
+        android:id="@+id/btn_add_to_cart"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:background="@mipmap/btn_button"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="Add to cart"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        android:textStyle="normal" />
+
+
+</RelativeLayout>

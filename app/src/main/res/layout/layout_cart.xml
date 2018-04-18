@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_toLeftOf="@+id/img_minus"
+        android:id="@+id/tv_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextColor"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:text="Full meal with rice"
+        />
+
+    <TextView
+        android:layout_toLeftOf="@+id/img_minus"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_item_price"
+        android:layout_below="@+id/tv_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextColor"
+        android:textSize="14sp"
+        android:fontFamily="sans-serif"
+        android:text="100"
+        />
+
+    <ImageView
+        android:id="@+id/img_plus"
+        android:layout_alignParentRight="true"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/icn_plus"
+        android:padding="5dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+    <TextView
+        android:layout_centerInParent="true"
+        android:layout_toLeftOf="@+id/img_plus"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_qty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorTextColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif"
+        android:text="3"
+        />
+    <ImageView
+        android:id="@+id/img_minus"
+        android:layout_toLeftOf="@+id/tv_qty"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/icn_minus"
+        android:padding="5dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+    <View
+        android:layout_below="@+id/tv_item_price"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="#EBEBEB"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"></View>
+
+</RelativeLayout>

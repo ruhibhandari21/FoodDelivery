@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:layout_margin="5dp"
+    >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    android:background="@drawable/bg_rect"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:text="Order Id:"
+        android:textSize="12sp"
+        android:textColor="#858585"
+        android:layout_alignParentLeft="true"
+        android:fontFamily="sans-serif"
+        android:id="@+id/txt_orderid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="1234567899"
+        android:textSize="12sp"
+        android:textColor="@color/colorGreen"
+        android:fontFamily="sans-serif"
+        android:id="@+id/tv_orderid"
+        android:layout_toRightOf="@+id/txt_orderid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+    <TextView
+        android:text="Order Date:"
+        android:textSize="12sp"
+        android:textColor="#858585"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="5dp"
+        android:fontFamily="sans-serif"
+        android:layout_below="@+id/tv_orderid"
+        android:id="@+id/txt_orderdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/tv_orderid"
+        android:text="12/03/2018"
+        android:textSize="12sp"
+        android:textColor="@color/colorGreen"
+        android:fontFamily="sans-serif"
+        android:id="@+id/tv_orderdate"
+        android:layout_toRightOf="@+id/txt_orderdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+
+
+    <TextView
+        android:text="Order Status:"
+        android:textSize="12sp"
+        android:textColor="#858585"
+        android:layout_toLeftOf="@+id/tv_orderstatus"
+        android:fontFamily="sans-serif"
+        android:id="@+id/txt_orderstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_alignParentRight="true"
+        android:text="Ordered"
+        android:textSize="12sp"
+        android:textColor="@color/colorGreen"
+        android:fontFamily="sans-serif"
+        android:id="@+id/tv_orderstatus"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_below="@+id/tv_orderstatus"
+        android:text="Total:"
+        android:textSize="14sp"
+        android:textColor="#858585"
+        android:layout_marginTop="5dp"
+        android:layout_toLeftOf="@+id/tv_ordertotal"
+        android:fontFamily="sans-serif"
+        android:id="@+id/txt_ordertotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_alignParentRight="true"
+        android:text="300"
+        android:textSize="14sp"
+        android:layout_marginTop="5dp"
+        android:textColor="@color/colorGreen"
+        android:fontFamily="sans-serif"
+        android:id="@+id/tv_ordertotal"
+        android:layout_below="@+id/tv_orderstatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+    <View
+        android:id="@+id/vv"
+        android:layout_below="@id/txt_orderdate"
+        android:background="#E5E5E5"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="0.5dp"></View>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/vv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/img_item"
+            android:scaleType="fitXY"
+            android:background="@color/colorGreen"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_below="@+id/img_item"
+            android:id="@+id/tv_rate"
+            android:textSize="10sp"
+            android:text="Give a Rating"
+            android:textColor="#858585"
+            android:fontFamily="sans-serif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_below="@+id/img_item"
+            android:id="@+id/rel_rate"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/tv_rate"
+            android:layout_width="wrap_content"
+            android:weightSum="5"
+            android:layout_height="30dp">
+
+            <ImageView
+                android:id="@+id/rate1"
+                android:background="@android:color/transparent"
+                android:src="@mipmap/icn_star_gray"
+                android:layout_weight="1"
+                android:padding="5dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <ImageView
+                android:id="@+id/rate2"
+                android:padding="5dp"
+                android:background="@android:color/transparent"
+                android:src="@mipmap/icn_star_gray"
+                android:layout_weight="1"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <ImageView
+                android:id="@+id/rate3"
+                android:padding="5dp"
+                android:background="@android:color/transparent"
+                android:src="@mipmap/icn_star_gray"
+                android:layout_weight="1"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <ImageView
+                android:id="@+id/rate4"
+                android:padding="5dp"
+                android:background="@android:color/transparent"
+                android:src="@mipmap/icn_star_gray"
+                android:layout_weight="1"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+            <ImageView
+                android:id="@+id/rate5"
+                android:padding="5dp"
+                android:background="@android:color/transparent"
+                android:src="@mipmap/icn_star_gray"
+                android:layout_weight="1"
+                android:layout_width="30dp"
+                android:layout_height="30dp" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_toLeftOf="@+id/btn_invoice"
+            android:layout_toRightOf="@+id/img_item"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/tv_item_name"
+            android:textSize="14sp"
+            android:text="Full meal with rice"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="sans-serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+
+        <TextView
+            android:layout_toLeftOf="@+id/btn_invoice"
+            android:layout_toRightOf="@+id/img_item"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/tv_item_name"
+            android:id="@+id/tv_item_price"
+            android:textSize="12sp"
+            android:text="300"
+            android:textColor="@color/colorBlack"
+            android:fontFamily="sans-serif"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_toRightOf="@+id/img_item"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/tv_item_price"
+            android:id="@+id/tv_item_quantity"
+            android:textSize="10sp"
+            android:text="Quantity:"
+            android:textColor="#858585"
+            android:fontFamily="sans-serif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/tv_item_quantity"
+            android:layout_below="@+id/tv_item_price"
+            android:id="@+id/tv_item_qty"
+            android:textSize="10sp"
+            android:text="1"
+            android:textColor="@color/colorGreen"
+            android:fontFamily="sans-serif"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_marginLeft="10dp"
+            android:id="@+id/btn_invoice"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:text="Invoice"
+            android:gravity="center"
+            android:background="@mipmap/btn_button"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="sans-serif"
+            android:layout_width="70dp"
+            android:layout_height="25dp" />
+
+
+        <Button
+            android:layout_marginLeft="10dp"
+            android:id="@+id/btn_cancel"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:textSize="12sp"
+            android:textAllCaps="false"
+            android:text="Cancel"
+            android:gravity="center"
+            android:background="@mipmap/btn_button"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="sans-serif"
+            android:layout_width="70dp"
+            android:layout_height="25dp" />
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>
+</RelativeLayout>

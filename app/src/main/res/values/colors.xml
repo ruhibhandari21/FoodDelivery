@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#CF241C</color>
+    <color name="colorPrimaryDark">#CF241C</color>
+    <color name="colorAccent">#CF241C</color>
+    <color name="colorRed">#CF241C</color>
+    <color name="colorGreen">#3AC56A</color>
+    <color name="colorViewBg">#CBCBCB</color>
+    <color name="colorTextColor">#4C4C4C</color>
+    <color name="colorLabelColor">#CCCCCC</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#ffffff</color>
+
+</resources>

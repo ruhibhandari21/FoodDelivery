@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--  <android.support.v4.widget.DrawerLayout
+          android:id="@+id/drawer_layout"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_alignParentTop="true"
+          android:layout_alignParentLeft="true"
+          android:layout_alignParentStart="true">-->
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/tv_title"
+            android:elevation="2dp"
+            android:layout_width="match_parent"
+            android:background="@color/colorRed"
+            android:layout_height="50dp">
+            <ImageView
+                android:textColor="@color/colorWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_centerInParent="true"
+                android:src="@mipmap/logo"
+
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/fragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/version"
+            android:layout_below="@+id/tv_title"
+            android:background="@color/colorRed">
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:weightSum="2"
+            android:orientation="horizontal"
+            android:id="@+id/version"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentBottom="true"
+            android:elevation="4dp"
+            android:background="@color/colorWhite"
+            android:gravity="center"
+            >
+
+            <RelativeLayout
+                android:padding="5dp"
+                android:id="@+id/rel_menu"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_menu"
+                    android:layout_width="25dp"
+                    android:src="@mipmap/icn_menu"
+                    android:layout_height="25dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_menu"
+                    android:layout_below="@+id/img_menu"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentBottom="true"
+                    android:text="Menu"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorGreen"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:padding="5dp"
+                android:id="@+id/rel_profile"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/img_profile"
+                    android:layout_width="25dp"
+                    android:src="@mipmap/icn_profile"
+                    android:layout_height="25dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerInParent="true"
+                    />
+                <TextView
+                    android:id="@+id/tv_profile"
+                    android:layout_below="@+id/img_profile"
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:layout_alignParentBottom="true"
+                    android:text="Profile"
+                    android:textSize="10sp"
+                    android:textColor="@color/colorLabelColor"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rel_cart"
+        android:background="@mipmap/ellipse_three"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="30dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp">
+
+        <ImageView
+            android:visibility="visible"
+            android:id="@+id/img_cart"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@mipmap/ic_cart"
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="15dp"
+            />
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/tv_count"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:text="3"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@color/colorRed"
+            android:textSize="28sp"
+
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="8dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cart"
+            android:gravity="center"
+            android:textColor="@color/colorLabelColor"
+            android:textSize="10sp"
+            android:layout_marginTop="5dp"
+            android:layout_centerInParent="true"
+            android:layout_below="@+id/img_cart"
+            />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/colorWhite"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:background="@color/colorRed"
+        android:layout_width="match_parent"
+        android:layout_height="160dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_profile"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/default_profile"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="5dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_below="@+id/img_profile"
+            android:layout_marginTop="5dp"
+            android:text="Jessica Jain"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:layout_marginLeft="20dp"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tv_employee_id"
+            android:layout_below="@+id/tv_name"
+            android:layout_marginTop="5dp"
+            android:text="Employee Id: 123456789"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="sans-serif"
+            android:layout_marginLeft="20dp"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_loyalty_points"
+            android:layout_below="@+id/tv_employee_id"
+            android:layout_marginTop="5dp"
+            android:text="Loyalty points: \u20B9100"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="sans-serif"
+            android:layout_marginLeft="20dp"
+            android:textSize="12sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:src="@mipmap/car"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_width="150dp"
+            android:layout_height="130dp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rel_my_orders"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img1"
+        android:layout_alignParentLeft="true"
+        android:layout_centerInParent="true"
+        android:src="@mipmap/icn_my_orders"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+    <TextView
+
+        android:id="@+id/tv_my_orders"
+        android:layout_toRightOf="@+id/img1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="     My Orders"
+        android:fontFamily="sans-serif"
+        android:gravity="center|left"
+        android:textColor="@color/colorTextColor"
+        android:textSize="16sp"
+        />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rel_logout"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img2"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/icn_logout"
+            android:layout_width="40dp"
+            android:layout_height="40dp" />
+        <TextView
+            android:layout_toRightOf="@+id/img2"
+            android:id="@+id/tv_logout"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:fontFamily="sans-serif"
+            android:text="     Logout"
+            android:gravity="center|left"
+            android:textColor="@color/colorTextColor"
+            android:textSize="16sp"
+            />
+
+    </RelativeLayout>
+</LinearLayout>
