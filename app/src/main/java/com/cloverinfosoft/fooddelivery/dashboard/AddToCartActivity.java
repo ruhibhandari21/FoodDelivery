@@ -192,6 +192,12 @@ public class AddToCartActivity extends AppCompatActivity implements OnTaskComple
                 if (jsonObject.optString("status").equals("success")) {
                     int quantity = 0;
                     JSONArray jsonArray = jsonObject.optJSONArray("items");
+                    if(jsonArray.length()==0)
+                    {
+                        tv_noitem.setVisibility(View.VISIBLE);
+                        add_to_cart.setVisibility(View.GONE);
+                        return;
+                    }
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject1 = jsonArray.optJSONObject(i);
                         CartItemsModel cartItemsModel = new CartItemsModel();
@@ -249,12 +255,12 @@ public class AddToCartActivity extends AppCompatActivity implements OnTaskComple
                 break;
 
             case "makeDummyOrderReadyForOnlinePayment":
-                if (jsonObject.optString("status").equals("success")) {
+              //  if (jsonObject.optString("status").equals("success")) {
                     callupdateDummyOrderBytxnid(jsonObject.optString("paymentId"));
 
-                } else {
-                    Toast.makeText(mContext, jsonObject.optString("msg"), Toast.LENGTH_SHORT).show();
-                }
+//                } else {
+//                    Toast.makeText(mContext, jsonObject.optString("msg"), Toast.LENGTH_SHORT).show();
+//                }
                 break;
             case "updateDummyOrderBytxnid":
                 if (jsonObject.optString("status").equals("success")) {
