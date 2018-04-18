@@ -251,7 +251,7 @@ public class AddToCartActivity extends AppCompatActivity implements OnTaskComple
 
             case "makeDummyOrderReadyForOnlinePayment":
                 if (jsonObject.optString("status").equals("success")) {
-                    callupdateDummyOrderBytxnid(jsonObject.optString("transactionId"));
+                    callupdateDummyOrderBytxnid(jsonObject.optString("paymentId"));
 
                 } else {
                     Toast.makeText(mContext, jsonObject.optString("msg"), Toast.LENGTH_SHORT).show();

@@ -201,6 +201,7 @@ public class WebService extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         try {
+            conn.disconnect();
 
             if (progress.isShowing()) {
                 progress.dismiss();
@@ -217,7 +218,7 @@ public class WebService extends AsyncTask<String, String, String> {
             }
 
             listener.onTaskCompleted(jsonObject, result, TAG);
-            conn.disconnect();
+
 
         } catch (Exception e) {
             Log.e("ReadJSONFeedTask", e.getLocalizedMessage() + "");
