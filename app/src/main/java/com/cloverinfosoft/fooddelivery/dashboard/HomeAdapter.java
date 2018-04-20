@@ -132,8 +132,11 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((MyViewHolder)holder).tv_price.setText("₹"+String.format("%.2f", Double.valueOf(hashMapProductList.get(position).getSellingPrice())));
             ((MyViewHolder)holder).tv_rating.setText(Double.valueOf(hashMapProductList.get(position).getRating())+"");
 
-            Picasso.with(mContext).load(hashMapProductList.get(position).getImage())
-                    .transform(new RoundedCornersTransformation(5, 1)).into(((MyViewHolder)holder).food_image);
+//            Picasso.with(mContext).load(hashMapProductList.get(position).getImage())
+//                    .transform(new RoundedCornersTransformation(5, 1)).into(((MyViewHolder)holder).food_image);
+
+            imageLoader.displayImage(hashMapProductList.get(position).getImage(),((MyViewHolder) holder).food_image);
+
 
             ((MyViewHolder)holder).btn_add_to_cart.setOnClickListener(new View.OnClickListener(){
                 @Override
