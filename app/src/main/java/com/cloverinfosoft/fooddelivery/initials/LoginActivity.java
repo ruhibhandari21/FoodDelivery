@@ -23,6 +23,7 @@ import com.cloverinfosoft.fooddelivery.Services.OnTaskCompleted;
 import com.cloverinfosoft.fooddelivery.Services.WebService;
 import com.cloverinfosoft.fooddelivery.dashboard.DashboardActivity;
 import com.cloverinfosoft.fooddelivery.utils.PreferencesManager;
+import com.cloverinfosoft.fooddelivery.utils.UnCaughtException;
 
 import org.json.JSONObject;
 
@@ -50,7 +51,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             startActivity(intent);
             finish();
         }
-
+        Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(
+                this));
         setContentView(R.layout.activity_login);
 
 //        preferencesManager.settoken("83597d10be49de34b28c637ffcbcea48");

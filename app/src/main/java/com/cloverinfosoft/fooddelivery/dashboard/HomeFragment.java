@@ -14,7 +14,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,13 +39,16 @@ import java.util.HashMap;
 public class HomeFragment extends Fragment implements View.OnClickListener, OnTaskCompleted {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     public static String prev_cat = "", current_cat = "";
     public static String total_products = "";
     HomeAdapter homeAdapter;
+    boolean isLoading = false;
+    int mPageSize = 10;
+    int pastVisiblesItems, visibleItemCount, totalItemCount;
+    GridLayoutManager mLayoutManager;
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
     private View view;
     private RelativeLayout rel_add_student, rel_add_teacher, rel_add_class, rel_add_subject;
     private Intent intent;
@@ -57,7 +59,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnTa
     private HashMap<Integer, ProductListModel> hashMapProductList = new HashMap<>();
     private PreferencesManager preferencesManager;
     private EndlessRecyclerViewScrollListener scrollListener;
+    /***
+     * Shadaf code for pagination
+     *
+     */
+    private RecyclerView.OnScrollListener recyclerViewOnScrollListener = new RecyclerView.OnScrollListener() {
+        @Override
+        public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+        }
 
+        @Override
+        public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+            super.onScrolled(recyclerView, dx, dy);
+            int visibleItemCount = mLayoutManager.getChildCount();
+            int totalItemCount = mLayoutManager.getItemCount();
+            int firstVisibleItemPosition = mLayoutManager.findFirstVisibleItemPosition();
+
+            if ((visibleItemCount + firstVisibleItemPosition) >= totalItemCount && !isLoading) {
+                isLoading = true;
+                ProductListModel model = new ProductListModel();
+                model.setName("load");
+                hashMapProductList.put(hashMapProductList.size(), model);
+                callProductList(current_cat, hashMapProductList.size()-1,true);
+            }
+        }
+    };
 
     public HomeFragment() {
         // Required empty public constructor
@@ -94,16 +121,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnTa
         return view;
     }
 
-    int pastVisiblesItems, visibleItemCount, totalItemCount;
-
     public void initUI() {
         tv_no_items = (TextView) view.findViewById(R.id.tv_no_items);
         recycler_view = (RecyclerView) view.findViewById(R.id.recycler_view);
         recycler_view_horizontal = (RecyclerView) view.findViewById(R.id.recycler_view_horizontal);
-        GridLayoutManager mLayoutManager = new GridLayoutManager(mContext, 2);
+        mLayoutManager = new GridLayoutManager(mContext, 2);
         recycler_view.setLayoutManager(mLayoutManager);
         recycler_view.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recycler_view.setItemAnimator(new DefaultItemAnimator());
+        recycler_view.addOnScrollListener(recyclerViewOnScrollListener);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false);
         recycler_view_horizontal.setLayoutManager(layoutManager);
@@ -119,13 +145,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnTa
 //        recycler_view.addOnScrollListener(scrollListener);
     }
 
-
-    public void clearAllProducts()
-    {
+    public void clearAllProducts() {
         hashMapProductList.clear();
 
-        if(homeAdapter!=null)
-        homeAdapter.notifyDataSetChanged();
+        if (homeAdapter != null)
+            homeAdapter.notifyDataSetChanged();
     }
 
     public void callGetCategory() {
@@ -137,17 +161,20 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnTa
 
     }
 
-    public void callProductList(String cat, int endpoint) {
+    public void callProductList(String cat, int endpoint, boolean isLoadMode) {
 //        clearAllProducts();
         HashMap<String, String> hashMap = new HashMap<>();
         hashMap.put("store-code", AppConstants.STORE_CODE);
         hashMap.put("authKey", AppConstants.AUTH_KEY);
         hashMap.put("deviceIp", preferencesManager.getdeviceIP());
-        hashMap.put("category", cat);
+        hashMap.put("category", preferencesManager.getselected_cat());
         hashMap.put("from", endpoint + "");
         hashMap.put("limit", 10 + "");
         current_cat = cat;
-        new WebService(mContext, this, hashMap, "productList").execute(AppConstants.BASE_URL + AppConstants.PRODUCT_LIST);
+
+        WebService webService = new WebService(mContext, this, hashMap, "productList");
+        webService.setProgress(!isLoadMode);
+        webService.execute(AppConstants.BASE_URL + AppConstants.PRODUCT_LIST);
     }
 
     public void callAddToCartWS(String slug, int endpoint) {
@@ -173,6 +200,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnTa
 
     @Override
     public void onTaskCompleted(JSONObject jsonObject, String result, String TAG) throws Exception {
+
         if (result.equals("")) {
             return;
         }
@@ -204,7 +232,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnTa
 
                     CategoryAdapter categoryAdapter = new CategoryAdapter(mContext, this, hashMapCategory);
                     recycler_view_horizontal.setAdapter(categoryAdapter);
-                    callProductList("", 0);
+                    callProductList("", 0, false);
 
                 } else {
                     Toast.makeText(mContext, jsonObject.optString("msg"), Toast.LENGTH_SHORT).show();
@@ -219,6 +247,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnTa
                     if (!prev_cat.equals(current_cat))
                         hashMapProductList.clear();
 
+                    int lastSize = hashMapProductList.size();
+                    try {
+                        if (hashMapProductList.get(lastSize - 1).getName().equalsIgnoreCase("load")) {
+                            hashMapProductList.remove(lastSize - 1);
+                            lastSize = hashMapProductList.size();
+                        }
+                    }catch (Exception e){e.printStackTrace();}
 
                     for (int i = 0; i < jsonCat.length(); i++) {
 
@@ -233,7 +268,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnTa
                         productListModel.setRating(jsonObj.optString("rating"));
                         productListModel.setSellingPrice(jsonObj.optString("sellingPrice"));
                         productListModel.setThumb(jsonObj.optString("thumb"));
-                        hashMapProductList.put(i, productListModel);
+                        hashMapProductList.put(hashMapProductList.size(), productListModel);
 
                     }
 
@@ -241,11 +276,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnTa
                     recycler_view.setVisibility(View.VISIBLE);
 //                    if(prev_cat.equals(current_cat))
 //                    {
-                    if (homeAdapter != null) {
-                        homeAdapter.notifyDataSetChanged();
-                    } else
+                    if (homeAdapter != null && lastSize != 0) {
+                        homeAdapter.notifyItemRangeInserted(lastSize + 1, (hashMapProductList.size() - lastSize));
+                    } else {
                         homeAdapter = new HomeAdapter(mContext, this, hashMapProductList);
-                    recycler_view.setAdapter(homeAdapter);
+                        recycler_view.setAdapter(homeAdapter);
+                    }
 //                    }
 //                    else
 //                    {
@@ -254,12 +290,24 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnTa
 //                    }
 
                     prev_cat = current_cat;
+                    isLoading = false;
                 } else {
-                    hashMapProductList.clear();
-                    homeAdapter.notifyDataSetChanged();
-                    tv_no_items.setVisibility(View.VISIBLE);
-                    recycler_view.setVisibility(View.GONE);
-                    Toast.makeText(mContext, jsonObject.optString("msg"), Toast.LENGTH_SHORT).show();
+                    if (prev_cat.equals(current_cat)){
+                        try {
+                            if (hashMapProductList.get(hashMapProductList.size() - 1).getName().equalsIgnoreCase("load")) {
+                                hashMapProductList.remove(hashMapProductList.size() - 1);
+                            }
+                        }catch (Exception e){e.printStackTrace();}
+                        Toast.makeText(mContext, "No more data available", Toast.LENGTH_SHORT).show();
+                    }else{
+                        hashMapProductList.clear();
+                        homeAdapter.notifyDataSetChanged();
+                        tv_no_items.setVisibility(View.VISIBLE);
+                        recycler_view.setVisibility(View.GONE);
+                        Toast.makeText(mContext, jsonObject.optString("msg"), Toast.LENGTH_SHORT).show();
+                    }
+
+                    isLoading = false;
                 }
                 break;
 
@@ -302,6 +350,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnTa
     }
 
     /**
+     * Converting dp to pixel
+     */
+    private int dpToPx(int dp) {
+        Resources r = getResources();
+        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    /**
      * RecyclerView item decoration - give equal margin around grid item
      */
     public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
@@ -337,14 +393,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, OnTa
                 }
             }
         }
-    }
-
-    /**
-     * Converting dp to pixel
-     */
-    private int dpToPx(int dp) {
-        Resources r = getResources();
-        return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
 }

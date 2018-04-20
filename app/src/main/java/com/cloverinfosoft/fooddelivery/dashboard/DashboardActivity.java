@@ -22,6 +22,7 @@ import com.cloverinfosoft.fooddelivery.Services.OnTaskCompleted;
 import com.cloverinfosoft.fooddelivery.Services.WebService;
 import com.cloverinfosoft.fooddelivery.model.CartItemsModel;
 import com.cloverinfosoft.fooddelivery.utils.PreferencesManager;
+import com.cloverinfosoft.fooddelivery.utils.UnCaughtException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -47,6 +48,8 @@ public class DashboardActivity extends AppCompatActivity implements View.OnClick
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(
+                this));
         setContentView(R.layout.activity_dashboard);
         preferencesManager = PreferencesManager.getInstance(this);
         mContext = DashboardActivity.this;

@@ -187,7 +187,7 @@ public class UnCaughtException implements UncaughtExceptionHandler {
                                         new String[]{
 
 
-                                                "ruhi.bhandari@quagnitia.com"});//
+                                                "bhandariruhi3@gmail.com"});//
                                 email.putExtra(Intent.EXTRA_SUBJECT, context
                                         .getClass().getName());
                                 email.putExtra(Intent.EXTRA_TEXT,

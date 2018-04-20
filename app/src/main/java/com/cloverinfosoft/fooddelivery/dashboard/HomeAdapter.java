@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.cloverinfosoft.fooddelivery.R;
@@ -19,9 +20,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
@@ -31,7 +29,7 @@ import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
  * Created by admin on 2/16/2018.
  */
 
-public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> {
+public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context mContext;
     private HashMap<Integer, ProductListModel> hashMapProductList;
     ImageLoader imageLoader;
@@ -39,6 +37,9 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
     DisplayImageOptions imageOptions2;
     HomeFragment homeFragment;
     PreferencesManager preferencesManager;
+
+    public final int TYPE_PRODUCT = 0;
+    public final int TYPE_LOAD = 1;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView food_image,img_veg_non_veg;
@@ -53,6 +54,15 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
             tv_price=(TextView)view.findViewById(R.id.tv_price);
             tv_rating=(TextView)view.findViewById(R.id.tv_rating);
             btn_add_to_cart=(Button)view.findViewById(R.id.btn_add_to_cart);
+        }
+    }
+
+    public class LoadViewHolder extends RecyclerView.ViewHolder {
+        ProgressBar progressBar;
+
+        public LoadViewHolder(View view) {
+            super(view);
+            progressBar = (ProgressBar)view.findViewById(R.id.progressBar);
         }
     }
 
@@ -91,37 +101,48 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
     }
 
     @Override
-    public HomeAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemView = layoutInflater.inflate(R.layout.layout_dashboard_tile, parent, false);
-        return new HomeAdapter.MyViewHolder(itemView);
+        if(viewType==TYPE_PRODUCT) {
+            View itemView = layoutInflater.inflate(R.layout.layout_dashboard_tile, parent, false);
+            return new MyViewHolder(itemView);
+        }else{
+            View itemView = layoutInflater.inflate(R.layout.row_load, parent, false);
+            return new LoadViewHolder(itemView);
+        }
+
+
     }
 
+
+
     @Override
-    public void onBindViewHolder(HomeAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
-        if(hashMapProductList.get(position).getProduct_type().equalsIgnoreCase("veg"))
-        {
-            holder.img_veg_non_veg.setImageResource(R.mipmap.icn_veg);
-        }
-        else
-        {
-            holder.img_veg_non_veg.setImageResource(R.mipmap.icn_non_veg);
-        }
+        if(getItemViewType(position)==TYPE_PRODUCT){
 
-        holder.tv_name.setText(hashMapProductList.get(position).getName());
-        holder.tv_price.setText("₹"+String.format("%.2f", Double.valueOf(hashMapProductList.get(position).getSellingPrice())));
-        holder.tv_rating.setText(Double.valueOf(hashMapProductList.get(position).getRating())+"");
-
-        Picasso.with(mContext).load(hashMapProductList.get(position).getImage())
-                .transform(new RoundedCornersTransformation(5, 1)).into(holder.food_image);
-
-        holder.btn_add_to_cart.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                homeFragment.callAddToCartWS(hashMapProductList.get(position).getSlug(),position);
+            if(hashMapProductList.get(position).getProduct_type().equalsIgnoreCase("veg"))
+                ((MyViewHolder) holder).img_veg_non_veg.setImageResource(R.mipmap.icn_veg);
+            else
+            {
+                ((MyViewHolder)holder).img_veg_non_veg.setImageResource(R.mipmap.icn_non_veg);
             }
-        });
+
+            ((MyViewHolder)holder).tv_name.setText(hashMapProductList.get(position).getName());
+            ((MyViewHolder)holder).tv_price.setText("₹"+String.format("%.2f", Double.valueOf(hashMapProductList.get(position).getSellingPrice())));
+            ((MyViewHolder)holder).tv_rating.setText(Double.valueOf(hashMapProductList.get(position).getRating())+"");
+
+            Picasso.with(mContext).load(hashMapProductList.get(position).getImage())
+                    .transform(new RoundedCornersTransformation(5, 1)).into(((MyViewHolder)holder).food_image);
+
+            ((MyViewHolder)holder).btn_add_to_cart.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    homeFragment.callAddToCartWS(hashMapProductList.get(position).getSlug(),position);
+                }
+            });
+        }
+
 
 
     }
@@ -131,5 +152,14 @@ public class HomeAdapter extends RecyclerView.Adapter<HomeAdapter.MyViewHolder> 
     public int getItemCount() {
         return hashMapProductList.size();//classList.size();
 
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if(hashMapProductList.get(position).getName().equals("load")){
+            return TYPE_LOAD;
+        }else{
+            return TYPE_PRODUCT;
+        }
     }
 }

@@ -122,7 +122,7 @@
         <ImageView
             android:id="@+id/img_item"
             android:scaleType="fitXY"
-            android:background="@color/colorGreen"
+            android:background="@android:color/transparent"
             android:layout_width="60dp"
             android:layout_height="60dp" />
         <TextView

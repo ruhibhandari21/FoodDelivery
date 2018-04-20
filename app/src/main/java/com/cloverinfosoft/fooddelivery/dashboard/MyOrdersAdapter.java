@@ -1,7 +1,6 @@
 package com.cloverinfosoft.fooddelivery.dashboard;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,10 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.cloverinfosoft.fooddelivery.R;
-import com.cloverinfosoft.fooddelivery.model.CartItemsModel;
 import com.cloverinfosoft.fooddelivery.model.MyOrderModel;
 import com.squareup.picasso.Picasso;
 
@@ -166,197 +163,217 @@ public class MyOrdersAdapter extends RecyclerView.Adapter<MyOrdersAdapter.MyView
                 break;
         }
 
+        //added by shadaf
+        if(myOrderModel.getRated().equalsIgnoreCase("false")){
 
-        holder.rate1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!hashMap.get(position).isFlag1())//false
-                {
-                    hashMap.get(position).setFlag1(true);
-                    hashMap.get(position).setFlag2(false);
-                    hashMap.get(position).setFlag3(false);
-                    hashMap.get(position).setFlag4(false);
-                    hashMap.get(position).setFlag5(false);
+            holder.rate1.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!hashMap.get(holder.getAdapterPosition()).isFlag1())//false
+                    {
+                        hashMap.get(holder.getAdapterPosition()).setFlag1(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag2(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag3(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag4(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag5(false);
 //                    holder.rate1.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate2.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate3.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate4.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate5.setImageResource(R.mipmap.icn_star_gray);
-                    cnt = 1;
-                } else {
-                    hashMap.get(position).setFlag1(false);
-                    hashMap.get(position).setFlag2(false);
-                    hashMap.get(position).setFlag3(false);
-                    hashMap.get(position).setFlag4(false);
-                    hashMap.get(position).setFlag5(false);
+                        cnt = 1;
+                    } else {
+                        hashMap.get(holder.getAdapterPosition()).setFlag1(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag2(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag3(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag4(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag5(false);
 //                    holder.rate1.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate2.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate3.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate4.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate5.setImageResource(R.mipmap.icn_star_gray);
-                    cnt = 0;
-                }
-                MyOrderModel myOrderModel1=hashMap.get(position);
-                myOrderModel1.setRating(cnt + "");
-                hashMap.put(position,myOrderModel1);
-                ((MyOrderActiviy)mContext).callRatingWS(hashMap.get(position).getCode(),cnt+"",position);
+                        cnt = 0;
+                    }
+                    MyOrderModel myOrderModel1=hashMap.get(holder.getAdapterPosition());
+                    myOrderModel1.setRating(cnt + "");
+//                hashMap.put(holder.getAdapterPosition(),myOrderModel1);
+                    ((MyOrderActiviy)mContext).callRatingWS(myOrderModel1.getCode(),cnt+"",position);
 //                ((MyOrderActiviy)mContext).HashmapValue(hashMap);
 
+                    notifyDataSetChanged();
+                }
+            });
 
-            }
-        });
+            holder.rate2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        holder.rate2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (!myOrderModel.isFlag2())//false
-                {
-                    hashMap.get(position).setFlag2(true);
-                    hashMap.get(position).setFlag1(true);
-                    hashMap.get(position).setFlag3(false);
-                    hashMap.get(position).setFlag4(false);
-                    hashMap.get(position).setFlag5(false);
+                    if (!hashMap.get(holder.getAdapterPosition()).isFlag2())//false
+                    {
+                        hashMap.get(holder.getAdapterPosition()).setFlag2(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag1(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag3(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag4(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag5(false);
 //                    holder.rate1.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate2.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate3.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate4.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate5.setImageResource(R.mipmap.icn_star_gray);
-                    cnt = 2;
-                } else {
-                    myOrderModel.setFlag1(true);
-                    myOrderModel.setFlag2(false);
-                    myOrderModel.setFlag3(false);
-                    myOrderModel.setFlag4(false);
-                    myOrderModel.setFlag5(false);
+                        cnt = 2;
+                    } else {
+                        myOrderModel.setFlag1(true);
+                        myOrderModel.setFlag2(false);
+                        myOrderModel.setFlag3(false);
+                        myOrderModel.setFlag4(false);
+                        myOrderModel.setFlag5(false);
 //                    holder.rate1.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate2.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate3.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate4.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate5.setImageResource(R.mipmap.icn_star_gray);
-                    cnt = 1;
-                }
-                MyOrderModel myOrderModel1=hashMap.get(position);
-                myOrderModel1.setRating(cnt + "");
-                hashMap.put(position,myOrderModel1);
-                ((MyOrderActiviy)mContext).callRatingWS(hashMap.get(position).getCode(),cnt+"",position);
+                        cnt = 1;
+                    }
+                    MyOrderModel myOrderModel1=hashMap.get(holder.getAdapterPosition());
+                    myOrderModel1.setRating(cnt + "");
+//                hashMap.put(holder.getAdapterPosition(),myOrderModel1);
+                    ((MyOrderActiviy)mContext).callRatingWS(myOrderModel1.getCode(),cnt+"",holder.getAdapterPosition());
 //                ((MyOrderActiviy)mContext).HashmapValue(hashMap);
-            }
-        });
+                    notifyDataSetChanged();
+                }
+            });
 
-        holder.rate3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            holder.rate3.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                if (!myOrderModel.isFlag3())//false
-                {
-                    hashMap.get(position).setFlag1(true);
-                    hashMap.get(position).setFlag2(true);
-                    hashMap.get(position).setFlag3(true);
-                    hashMap.get(position).setFlag4(false);
-                    hashMap.get(position).setFlag5(false);
+                    if (!hashMap.get(holder.getAdapterPosition()).isFlag3())//false
+                    {
+                        hashMap.get(holder.getAdapterPosition()).setFlag1(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag2(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag3(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag4(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag5(false);
 //                    holder.rate1.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate2.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate3.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate4.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate5.setImageResource(R.mipmap.icn_star_gray);
-                    cnt = 3;
-                } else {
-                    hashMap.get(position).setFlag1(true);
-                    hashMap.get(position).setFlag2(true);
-                    hashMap.get(position).setFlag3(false);
-                    hashMap.get(position).setFlag4(false);
-                    hashMap.get(position).setFlag5(false);
+                        cnt = 3;
+                    } else {
+                        hashMap.get(holder.getAdapterPosition()).setFlag1(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag2(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag3(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag4(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag5(false);
 //                    holder.rate1.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate2.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate3.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate4.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate5.setImageResource(R.mipmap.icn_star_gray);
-                    cnt = 2;
-                }
-                MyOrderModel myOrderModel1=hashMap.get(position);
-                myOrderModel1.setRating(cnt + "");
-                hashMap.put(position,myOrderModel1);
-                ((MyOrderActiviy)mContext).callRatingWS(hashMap.get(position).getCode(),cnt+"",position);
+                        cnt = 2;
+                    }
+                    MyOrderModel myOrderModel1=hashMap.get(holder.getAdapterPosition());
+                    myOrderModel1.setRating(cnt + "");
+//                hashMap.put(holder.getAdapterPosition(),myOrderModel1);
+                    ((MyOrderActiviy)mContext).callRatingWS(myOrderModel1.getCode(),cnt+"",holder.getAdapterPosition());
 //                ((MyOrderActiviy)mContext).HashmapValue(hashMap);
-            }
-        });
+                    notifyDataSetChanged();
+                }
+            });
 
-        holder.rate4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            holder.rate4.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                if (!hashMap.get(position).isFlag4())//false
-                {
-                    hashMap.get(position).setFlag1(true);
-                    hashMap.get(position).setFlag2(true);
-                    hashMap.get(position).setFlag3(true);
-                    hashMap.get(position).setFlag4(true);
-                    hashMap.get(position).setFlag5(false);
+                    if (!hashMap.get(holder.getAdapterPosition()).isFlag4())//false
+                    {
+                        hashMap.get(holder.getAdapterPosition()).setFlag1(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag2(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag3(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag4(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag5(false);
 //                    holder.rate1.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate2.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate3.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate4.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate5.setImageResource(R.mipmap.icn_star_gray);
-                    cnt = 4;
-                } else {
-                    hashMap.get(position).setFlag1(true);
-                    hashMap.get(position).setFlag2(true);
-                    hashMap.get(position).setFlag3(true);
-                    hashMap.get(position).setFlag4(false);
-                    hashMap.get(position).setFlag5(false);
+                        cnt = 4;
+                    } else {
+                        hashMap.get(holder.getAdapterPosition()).setFlag1(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag2(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag3(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag4(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag5(false);
 //                    holder.rate1.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate2.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate3.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate4.setImageResource(R.mipmap.icn_star_gray);
 //                    holder.rate5.setImageResource(R.mipmap.icn_star_gray);
-                    cnt = 3;
-                }
-                MyOrderModel myOrderModel1=hashMap.get(position);
-                myOrderModel1.setRating(cnt + "");
-                hashMap.put(position,myOrderModel1);
-                ((MyOrderActiviy)mContext).callRatingWS(hashMap.get(position).getCode(),cnt+"",position);
+                        cnt = 3;
+                    }
+                    MyOrderModel myOrderModel1=hashMap.get(holder.getAdapterPosition());
+                    myOrderModel1.setRating(cnt + "");
+//                hashMap.put(holder.getAdapterPosition(),myOrderModel1);
+                    ((MyOrderActiviy)mContext).callRatingWS(myOrderModel1.getCode(),cnt+"",holder.getAdapterPosition());
 //                ((MyOrderActiviy)mContext).HashmapValue(hashMap);
-            }
-        });
+                    notifyDataSetChanged();
+                }
+            });
 
-        holder.rate5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            holder.rate5.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                if (!hashMap.get(position).isFlag5())//false
-                {
-                    hashMap.get(position).setFlag1(true);
-                    hashMap.get(position).setFlag2(true);
-                    hashMap.get(position).setFlag3(true);
-                    hashMap.get(position).setFlag4(true);
-                    hashMap.get(position).setFlag5(true);
+                    if (!hashMap.get(holder.getAdapterPosition()).isFlag5())//false
+                    {
+                        hashMap.get(holder.getAdapterPosition()).setFlag1(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag2(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag3(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag4(true);
+                        hashMap.get(holder.getAdapterPosition()).setFlag5(true);
 //                    holder.rate1.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate2.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate3.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate4.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate5.setImageResource(R.mipmap.icn_rating);
-                    cnt = 5;
-                } else {
-                    hashMap.get(position).setFlag1(false);
-                    hashMap.get(position).setFlag2(false);
-                    hashMap.get(position).setFlag3(false);
-                    hashMap.get(position).setFlag4(false);
-                    hashMap.get(position).setFlag5(false);
+                        cnt = 5;
+                    } else {
+                        hashMap.get(holder.getAdapterPosition()).setFlag1(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag2(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag3(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag4(false);
+                        hashMap.get(holder.getAdapterPosition()).setFlag5(false);
 //                    holder.rate1.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate2.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate3.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate4.setImageResource(R.mipmap.icn_rating);
 //                    holder.rate5.setImageResource(R.mipmap.icn_star_gray);
-                    cnt = 4;
-                }
-                MyOrderModel myOrderModel1=hashMap.get(position);
-                myOrderModel1.setRating(cnt + "");
-                hashMap.put(position,myOrderModel1);
-                ((MyOrderActiviy)mContext).callRatingWS(hashMap.get(position).getCode(),cnt+"",position);
+                        cnt = 4;
+                    }
+                    MyOrderModel myOrderModel1=hashMap.get(holder.getAdapterPosition());
+                    myOrderModel1.setRating(cnt + "");
+//                hashMap.put(holder.getAdapterPosition(),myOrderModel1);
+
+                    ((MyOrderActiviy)mContext).callRatingWS(myOrderModel1.getCode(),cnt+"",holder.getAdapterPosition());
 //                ((MyOrderActiviy)mContext).HashmapValue(hashMap);
-            }
-        });
+                    notifyDataSetChanged();
+                }
+            });
+
+        }
+        else
+        {
+            holder.rate1.setOnClickListener(null);
+            holder.rate2.setOnClickListener(null);
+            holder.rate3.setOnClickListener(null);
+            holder.rate4.setOnClickListener(null);
+            holder.rate5.setOnClickListener(null);
+
+        }
+
+
 
     }
 

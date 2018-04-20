@@ -16,6 +16,7 @@ import com.cloverinfosoft.fooddelivery.Services.AppConstants;
 import com.cloverinfosoft.fooddelivery.Services.OnTaskCompleted;
 import com.cloverinfosoft.fooddelivery.Services.WebService;
 import com.cloverinfosoft.fooddelivery.utils.PreferencesManager;
+import com.cloverinfosoft.fooddelivery.utils.UnCaughtException;
 
 import org.json.JSONObject;
 
@@ -34,6 +35,8 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(
+                this));
         setContentView(R.layout.activity_forgot_password);
         preferencesManager=PreferencesManager.getInstance(this);
         mContext = ForgotPasswordActivity.this;

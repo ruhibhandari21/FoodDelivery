@@ -1,30 +1,18 @@
 package com.cloverinfosoft.fooddelivery.dashboard;
 
-import android.app.Fragment;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.cloverinfosoft.fooddelivery.R;
 import com.cloverinfosoft.fooddelivery.model.CategoryModel;
 import com.cloverinfosoft.fooddelivery.utils.PreferencesManager;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-import com.nostra13.universalimageloader.core.assist.ImageScaleType;
-import com.squareup.picasso.Picasso;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import jp.wasabeef.picasso.transformations.RoundedCornersTransformation;
 
 
 /**
@@ -57,14 +45,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
     }
 
     @Override
-    public CategoryAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemView = layoutInflater.inflate(R.layout.lay_category_row, parent, false);
-        return new CategoryAdapter.MyViewHolder(itemView);
+        return new MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final CategoryAdapter.MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         holder.tv_name.setText(categoryModelHashMap.get(position).getName());
         if(selected_position==position)
@@ -88,13 +76,13 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.MyView
 
                 if(position==0)
                 {
-                    fragment.callProductList("",0);
+                    fragment.callProductList("",0, false);
                     preferencesManager.setselected_cat("");
                 }
                 else
                 {
                     preferencesManager.setselected_cat(categoryModelHashMap.get(position).getName());
-                    fragment.callProductList(categoryModelHashMap.get(position).getName(),0);
+                    fragment.callProductList(categoryModelHashMap.get(position).getName(),0, false);
                 }
 
             }

@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
-
 
 import com.cloverinfosoft.fooddelivery.R;
 
@@ -46,6 +44,7 @@ public class WebService extends AsyncTask<String, String, String> {
     HashMap<String, String> postDataParams;
     String TAG, dup_url = "";
     ProgressDialog progress;
+    private boolean progressVisible = true;
 
 
     public WebService(Context mContext, OnTaskCompleted listener, HashMap<String, String> postDataParams, String TAG) {
@@ -183,9 +182,9 @@ public class WebService extends AsyncTask<String, String, String> {
 
         progress = new ProgressDialog(mContext);
         progress.setMessage("Loading.......");
-
         progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progress.setIndeterminate(true);
+        if(progressVisible)
         progress.show();
 
 
@@ -277,6 +276,10 @@ public class WebService extends AsyncTask<String, String, String> {
             }
 
         });
+    }
+    
+    public void setProgress(boolean visible){
+        progressVisible = visible;
     }
 
 }//end of class

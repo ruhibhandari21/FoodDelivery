@@ -1,14 +1,13 @@
 package com.cloverinfosoft.fooddelivery.dashboard;
 
 import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -123,7 +122,7 @@ public class MyOrderActiviy extends AppCompatActivity implements View.OnClickLis
 
             if(TAG.equals("rating"))
             {
-                switch (rate)
+                /*switch (rate)
                 {
                     case 0:
                         hashMap.get(position).setFlag1(false);
@@ -135,15 +134,6 @@ public class MyOrderActiviy extends AppCompatActivity implements View.OnClickLis
                         HashmapValue(hashMap);
                         break;
                     case 1:
-                        hashMap.get(position).setRating("0");
-                        hashMap.get(position).setFlag1(false);
-                        hashMap.get(position).setFlag2(false);
-                        hashMap.get(position).setFlag3(false);
-                        hashMap.get(position).setFlag4(false);
-                        hashMap.get(position).setFlag5(false);
-                        HashmapValue(hashMap);
-                        break;
-                    case 2:
                         hashMap.get(position).setRating("1");
                         hashMap.get(position).setFlag1(true);
                         hashMap.get(position).setFlag2(false);
@@ -152,7 +142,7 @@ public class MyOrderActiviy extends AppCompatActivity implements View.OnClickLis
                         hashMap.get(position).setFlag5(false);
                         HashmapValue(hashMap);
                         break;
-                    case 3:
+                    case 2:
                         hashMap.get(position).setRating("2");
                         hashMap.get(position).setFlag1(true);
                         hashMap.get(position).setFlag2(true);
@@ -161,7 +151,7 @@ public class MyOrderActiviy extends AppCompatActivity implements View.OnClickLis
                         hashMap.get(position).setFlag5(false);
                         HashmapValue(hashMap);
                         break;
-                    case 4:
+                    case 3:
                         hashMap.get(position).setRating("3");
                         hashMap.get(position).setFlag1(true);
                         hashMap.get(position).setFlag2(true);
@@ -170,7 +160,7 @@ public class MyOrderActiviy extends AppCompatActivity implements View.OnClickLis
                         hashMap.get(position).setFlag5(false);
                         HashmapValue(hashMap);
                         break;
-                    case 5:
+                    case 4:
                         hashMap.get(position).setRating("4");
                         hashMap.get(position).setFlag1(true);
                         hashMap.get(position).setFlag2(true);
@@ -179,7 +169,16 @@ public class MyOrderActiviy extends AppCompatActivity implements View.OnClickLis
                         hashMap.get(position).setFlag5(false);
                         HashmapValue(hashMap);
                         break;
-                }
+                    case 5:
+                        hashMap.get(position).setRating("5");
+                        hashMap.get(position).setFlag1(true);
+                        hashMap.get(position).setFlag2(true);
+                        hashMap.get(position).setFlag3(true);
+                        hashMap.get(position).setFlag4(true);
+                        hashMap.get(position).setFlag5(true);
+                        HashmapValue(hashMap);
+                        break;
+                }*/
             }
 
             return;
@@ -208,6 +207,61 @@ public class MyOrderActiviy extends AppCompatActivity implements View.OnClickLis
                             myOrderModel.setSubTotal(jsonObject2.optString("subTotal"));
                             myOrderModel.setTotal(jsonObject2.optString("total"));
                             myOrderModel.setTax(jsonObject2.optString("tax"));
+                            if(!jsonObject1.has("rating")){
+                                jsonObject1.put("rating","0");
+                            }
+                            myOrderModel.setRating(jsonObject1.optString("rating").equalsIgnoreCase("") ? "0" : jsonObject1.optString("rating"));
+                            switch (Integer.parseInt(myOrderModel.getRating()))
+                            {
+                                case 0:
+                                    myOrderModel.setFlag1(false);
+                                    myOrderModel.setFlag2(false);
+                                    myOrderModel.setFlag3(false);
+                                    myOrderModel.setFlag4(false);
+                                    myOrderModel.setFlag5(false);
+                                    myOrderModel.setRating("0");
+                                    break;
+                                case 1:
+                                    myOrderModel.setRating("1");
+                                    myOrderModel.setFlag1(true);
+                                    myOrderModel.setFlag2(false);
+                                    myOrderModel.setFlag3(false);
+                                    myOrderModel.setFlag4(false);
+                                    myOrderModel.setFlag5(false);
+                                    break;
+                                case 2:
+                                    myOrderModel.setRating("2");
+                                    myOrderModel.setFlag1(true);
+                                    myOrderModel.setFlag2(true);
+                                    myOrderModel.setFlag3(false);
+                                    myOrderModel.setFlag4(false);
+                                    myOrderModel.setFlag5(false);
+                                    break;
+                                case 3:
+                                    myOrderModel.setRating("3");
+                                    myOrderModel.setFlag1(true);
+                                    myOrderModel.setFlag2(true);
+                                    myOrderModel.setFlag3(true);
+                                    myOrderModel.setFlag4(false);
+                                    myOrderModel.setFlag5(false);
+                                    break;
+                                case 4:
+                                    myOrderModel.setRating("4");
+                                    myOrderModel.setFlag1(true);
+                                    myOrderModel.setFlag2(true);
+                                    myOrderModel.setFlag3(true);
+                                    myOrderModel.setFlag4(true);
+                                    myOrderModel.setFlag5(false);
+                                    break;
+                                case 5:
+                                    myOrderModel.setRating("5");
+                                    myOrderModel.setFlag1(true);
+                                    myOrderModel.setFlag2(true);
+                                    myOrderModel.setFlag3(true);
+                                    myOrderModel.setFlag4(true);
+                                    myOrderModel.setFlag5(true);
+                                    break;
+                            }
                             hashMap.put(k, myOrderModel);
                             k++;
                         }

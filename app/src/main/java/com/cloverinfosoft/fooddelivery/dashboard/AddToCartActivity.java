@@ -19,6 +19,7 @@ import com.cloverinfosoft.fooddelivery.Services.OnTaskCompleted;
 import com.cloverinfosoft.fooddelivery.Services.WebService;
 import com.cloverinfosoft.fooddelivery.model.CartItemsModel;
 import com.cloverinfosoft.fooddelivery.utils.PreferencesManager;
+import com.cloverinfosoft.fooddelivery.utils.UnCaughtException;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -40,6 +41,8 @@ public class AddToCartActivity extends AppCompatActivity implements OnTaskComple
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Thread.setDefaultUncaughtExceptionHandler(new UnCaughtException(
+                this));
         setContentView(R.layout.activity_add_to_cart);
         preferencesManager = PreferencesManager.getInstance(this);
         mContext = this;
