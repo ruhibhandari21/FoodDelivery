@@ -1,11 +1,13 @@
 package com.cloverinfosoft.fooddelivery.dashboard;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -137,6 +139,16 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
             imageLoader.displayImage(hashMapProductList.get(position).getImage(),((MyViewHolder) holder).food_image);
 
+            ((MyViewHolder) holder).food_image.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v) {
+                    final Dialog dialog = new Dialog(mContext);
+                    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                    dialog.setCancelable(true);
+                    dialog.setContentView(R.layout.dialog);
+                    dialog.show();
+                }
+            });
 
             ((MyViewHolder)holder).btn_add_to_cart.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -145,6 +157,7 @@ public class HomeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                 }
             });
         }
+
 
 
 
